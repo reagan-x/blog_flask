@@ -44,7 +44,6 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-
         error = None
         
         user = User.query.filter_by(username = username).first()
@@ -85,3 +84,48 @@ def login_required(view):
             return redirect(url_for('auth.login'))
         return view(**kwargs)
     return wrapped_view
+
+
+@auth.route('/profile', methods=('GET','POST'))
+def profile():
+
+    return render_template('auth/profile.html')
+
+@auth.route('/settings', methods=('GET','POST'))
+def settings():
+
+    return render_template('auth/settings.html')
+
+@auth.route('/edit_profile', methods=('GET','POST'))
+def edit_profile():
+
+    return render_template('auth/edit_profile.html')
+    
+
+@auth.route('/upload-image', methods=('POST',))
+@login_required
+def upload_image():
+    if request.method == 'POST':
+        if 'image' not in request.files:
+            flash('No se ha seleccionado ninguna imagen.')
+            return redirect(url_for('auth.profile'))
+        
+        file = request.files['image']
+        
+        if file.filename == '':
+            flash('No se ha seleccionado ninguna imagen.')
+            return redirect(url_for('auth.profile'))
+        
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            
+            user = g.user
+            user.image = filename
+            db.session.commit()
+            
+            flash('Imagen subida correctamente.')
+            return redirect(url_for('auth.profile'))
+        
+        flash('Tipo de archivo no permitido.')
+        return redirect(url_for('auth.profile'))

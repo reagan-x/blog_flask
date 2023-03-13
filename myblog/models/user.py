@@ -9,6 +9,7 @@ class User(db.Model):
     def __init__(self, username, password) -> None:
         self.username = username
         self.password = password
+        self.email = email
 
     def __repr__(self) -> str:
         return f'User: {self.username}'

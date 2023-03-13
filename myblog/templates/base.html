@@ -20,8 +20,8 @@
             <nav>
                 {% if g.user %}
                 <img src="{{ url_for('static', filename='img/user.png')}}" alt="">
-                <span>{{ g.user.username }}</span>
-                <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
+                <a href="{{ url_for('auth.profile') }}">{{ g.user.username }}</a>
+                <a href="{{ url_for('auth.settings') }}"><img src="{{ url_for('static', filename='img/settings.ico')}}" alt=""></a>
                 {% else %}
                 <a href="{{ url_for('auth.register') }}">Registrar Usuario</a>
                 <a href="{{ url_for('auth.login') }}">Iniciar Sesión</a>

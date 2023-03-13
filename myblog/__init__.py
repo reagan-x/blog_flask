@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 #Cargar las configuraciones
 app.config.from_object('config.DevelopmentConfig')
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:k2grVzkGfPnf_Ei@localhost:3306/blog_db"
 db = SQLAlchemy(app)
 
 #Importar vistas 
@@ -15,4 +16,5 @@ from myblog.views.blog import blog
 app.register_blueprint(blog)
 app.add_url_rule('/', endpoint='index')
 
-db.create_all()
+with app.app_context():
+    db.create_all()

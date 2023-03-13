@@ -10,7 +10,7 @@ body{
 }
 
 .header{
-    background-color: #e6a4d7;
+    background-color: #313131;
 }
 .nav{
     display: flex;
@@ -58,7 +58,7 @@ body{
 
 /* Mensaje de Flahs*/
 .flash{
-    background-color: #0c950c;
+    background-color: #d10000;
     color: #fff;
     padding: 10px;
 }
@@ -114,13 +114,13 @@ form input[type=submit]{
 .login input[type=submit]{
     margin: 10px 0;
     min-width: 100%;
-    background-color: #e6a4d7;
+    background-color: #313131;
     border: none;
     border-radius: 5px;
     color: #fff;
 }
 
 .login input[type=submit]:hover{
-    background-color: #e6a4d7;
+    background-color: #313131;
     cursor: pointer;
 }
